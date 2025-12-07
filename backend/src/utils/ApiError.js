@@ -1,3 +1,10 @@
+/**
+ * ApiError class
+ * @constructor {string} statuscode
+ * @constructor {string}
+ *
+ *
+ */
 export class ApiError extends Error {
   constructor(statusCode, message) {
     super(message);
