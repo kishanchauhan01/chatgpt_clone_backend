@@ -13,8 +13,6 @@ const verifyJwt = asyncHandler(async (req, res, next) => {
     const refreshToken =
       req.cookies?.refreshToken || req.header("x-refresh-token");
 
-    console.log(accessToken);
-
     const decodedToken = jwt.verify(
       accessToken,
       process.env.ACCESS_TOKEN_SECRET

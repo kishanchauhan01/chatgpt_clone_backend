@@ -14,7 +14,7 @@ export async function ollamaResponseStream(role, msg) {
       {
         role: "system",
         content:
-          "You are a helpful assistant. Respond ONLY in pure Markdown format. Do not use any HTML tags such as <br>, <p>, or <div>. For line breaks, use '\\n'.",
+          "You are a helpful assistant. Respond ONLY in pure Markdown format. No HTML tags. Use '\\n' for line breaks. Use emojis when helpful.",
       },
       { role, content: msg },
     ],

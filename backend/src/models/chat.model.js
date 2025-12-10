@@ -13,8 +13,15 @@ const chatSchema = new Schema(
       required: true,
     },
 
-    message: [
+    messages: [
       {
+        id: {
+          type: String,
+          required: function () {
+            return this.role === "user"; // Only user msg need id
+          },
+        },
+
         role: {
           type: String,
           enum: ["user", "assistant", "system"],
