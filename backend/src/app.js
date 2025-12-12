@@ -12,7 +12,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "chat-gpt-clone-frontend-eight.vercel.app",
+      "https://chat-gpt-clone-frontend-eight.vercel.app",
     ],
     credentials: true,
   })
