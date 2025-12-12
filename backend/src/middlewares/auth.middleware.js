@@ -10,6 +10,8 @@ const verifyJwt = asyncHandler(async (req, res, next) => {
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
 
+    console.log(accessToken);
+
     const refreshToken =
       req.cookies?.refreshToken || req.header("x-refresh-token");
 
@@ -39,3 +41,4 @@ const verifyJwt = asyncHandler(async (req, res, next) => {
 });
 
 export { verifyJwt };
+
