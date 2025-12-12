@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { ollamaResponseStream } from "./ollamaApi.js";
+import { ollamaResponseStream, titleResponse } from "./ollamaApi.js";
 import { Chat } from "../models/chat.model.js";
 import { appendChat, createNewChat } from "../controllers/chat.controller.js";
 import { ApiError } from "./ApiError.js";
@@ -43,12 +43,14 @@ export const initSocket = (server) => {
         socket.emit("model_done", fullReply);
 
         if (message.isNewChat && message.userId) {
-          const chat = await createNewChat({ message }, fullReply);
-          socket.emit("newChatId", chat._id);
+          const chatTitle = (
+            await titleResponse(fullReply)
+          ).message.content.trim();
+
+          const chat = await createNewChat({ message }, fullReply, chatTitle);
+          socket.emit("newChat", { chatId: chat._id, chatTitle });
         } else if (!message.isNewChat && message.chatId) {
-          console.log("here");
-          const updatedChat = await appendChat({ message }, fullReply);
-          
+          await appendChat({ message }, fullReply);
         }
 
         // console.log(fullReply);
