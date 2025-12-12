@@ -91,6 +91,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
+    sameSite: "None",
   };
 
   return res
@@ -133,6 +134,7 @@ const refreshAccessAndRefreshToken = asyncHandler(async (req, res, next) => {
     const options = {
       httpOnly: true,
       secure: true,
+      sameSite: "None",
     };
 
     req.user = user;
@@ -158,15 +160,13 @@ const isLoggedIn = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Please login");
   }
 
-  return res
-    .status(200)
-    .json(
-      new ApiResponse(200, "user is logged in", {
-        user,
-        accessToken,
-        refreshToken,
-      })
-    );
+  return res.status(200).json(
+    new ApiResponse(200, "user is logged in", {
+      user,
+      accessToken,
+      refreshToken,
+    })
+  );
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
