@@ -6,11 +6,14 @@ import { initSocket } from "./utils/socket.js";
 
 const app = express();
 const httpServer = createServer(app);
-initSocket(httpServer)
+initSocket(httpServer);
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "chat-gpt-clone-frontend-eight.vercel.app",
+    ],
     credentials: true,
   })
 );
