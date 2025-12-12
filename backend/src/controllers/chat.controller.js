@@ -5,7 +5,7 @@ import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 const createNewChat = async ({ message }, LLMResponse, chatTitle) => {
-  const { prompt, msgId, userId, chatId, isNewChat } = message;
+  const { prompt, msgId, userId } = message;
 
   if (!userId) {
     throw new ApiError(404, "UserId is required");

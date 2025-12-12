@@ -17,14 +17,8 @@ export const initSocket = (server) => {
   io.on("connection", (socket) => {
     console.log("Client connected:", socket.id);
 
-    // socket.on("test_msg", (message) => {
-    //   socket.emit("test_chek", message + " # this is tested");
-    //   console.log("msg sent", message);
-    // });
-
     socket.on("user_message", async ({ message }) => {
       try {
-        console.log(message.prompt);
         if (message.userId != null) {
         }
         const stream = await ollamaResponseStream("user", message.prompt);
@@ -33,7 +27,6 @@ export const initSocket = (server) => {
         for await (const part of stream) {
           const chunk = part.message?.content || "";
           fullReply += chunk;
-          // console.log(chunk);
 
           // send chunks to frontend
           socket.emit("model_chunk", chunk);
@@ -53,7 +46,6 @@ export const initSocket = (server) => {
           await appendChat({ message }, fullReply);
         }
 
-        // console.log(fullReply);
       } catch (error) {
         console.error("this is error:- ", error);
         socket.emit("model_error", "Stream failed");
